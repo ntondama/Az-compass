@@ -1,33 +1,46 @@
 import streamlit as st
+from services.csv_service import CSVService
 
-from components.dashboard_cards import show_dashboard_cards
+service = CSVService()
 
 
 def show_dashboard():
 
-    st.subheader("🏠 Dashboard")
-
-    show_dashboard_cards()
-
-    st.divider()
-
-    st.subheader("🚀 Quick Actions")
+    st.title("📊 Dashboard")
 
     col1, col2, col3 = st.columns(3)
 
-    with col1:
-        st.button("📦 Product Catalog")
+    col1.metric(
+        "Products",
+        service.get_total_products()
+    )
 
-    with col2:
-        st.button("📈 Run Simulation")
+    col2.metric(
+        "Categories",
+        service.get_total_categories()
+    )
 
-    with col3:
-        st.button("📑 View Reports")
+    col3.metric(
+        "Active Products",
+        service.get_active_products()
+    )
 
-    st.divider()
+    st.markdown("---")
 
-    st.subheader("🤖 AI Insights")
+    st.subheader("Demand Planning Overview")
 
     st.info(
-        "AI recommendations will appear here after Azure AI integration."
+        """
+        Welcome to Demand Copilot.
+
+        This dashboard will provide
+
+        • Product Planning
+
+        • Demand Simulation
+
+        • AI Insights
+
+        • Business Reports
+        """
     )

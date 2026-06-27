@@ -1,46 +1,35 @@
-import sys
-from pathlib import Path
-
-project_root = Path(__file__).resolve().parent.parent
-sys.path.append(str(project_root))
+import streamlit as st
 
 from components.header import render_header
 from components.sidebar import render_sidebar
 
 from pages.dashboard import show_dashboard
-from pages.product_catalog import show_product_catalog
-from pages.demand_simulator import show_demand_simulator
+from pages.product_master import show_product_master
+from pages.demand_planning import show_demand_planning
 from pages.reports import show_reports
 from pages.ai_copilot import show_ai_copilot
 
+st.set_page_config(
+    page_title="Demand Copilot",
+    page_icon="📈",
+    layout="wide"
+)
 
-def main():
+render_header()
 
-    render_header()
+page = render_sidebar()
 
-    page = render_sidebar()
+if page == "Dashboard":
+    show_dashboard()
 
-    if page == "🏠 Dashboard":
+elif page == "Product Catalog":
+    show_product_master()
 
-        show_dashboard()
+elif page == "Demand Simulator":
+    show_demand_planning()
 
-    elif page == "📦 Product Catalog":
+elif page == "Reports":
+    show_reports()
 
-        show_product_catalog()
-
-    elif page == "📈 Demand Simulator":
-
-        show_demand_simulator()
-
-    elif page == "📑 Reports":
-
-        show_reports()
-
-    elif page == "🤖 AI Copilot":
-
-        show_ai_copilot()
-
-
-if __name__ == "__main__":
-
-    main()
+elif page == "AI Copilot":
+    show_ai_copilot()

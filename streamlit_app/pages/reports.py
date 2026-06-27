@@ -3,10 +3,6 @@ import streamlit as st
 
 def show_reports():
 
-    st.subheader("📑 Reports")
+    st.title("📑 Reports")
 
-    st.info(
-
-        "Business reports will be available in the next sprint."
-
-    )
+    st.success("Reports module coming in next sprint.")
