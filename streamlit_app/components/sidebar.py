@@ -2,16 +2,29 @@ import streamlit as st
 
 
 def render_sidebar():
+
     with st.sidebar:
-        st.header("Navigation")
 
-        st.success("Sprint 3")
+        st.title("Demand Copilot")
 
-        st.write("✅ Product Master")
-        st.write("🚧 Demand Planning")
-        st.write("🚧 Reports")
-        st.write("🚧 AI Assistant")
+        page = st.radio(
 
-        st.divider()
+            "Navigation",
 
-        st.info("Version 1.0")
+            [
+
+                "🏠 Dashboard",
+
+                "📦 Product Catalog",
+
+                "📈 Demand Simulator",
+
+                "📑 Reports",
+
+                "🤖 AI Copilot"
+
+            ]
+
+        )
+
+    return page
