@@ -7,13 +7,13 @@ sys.path.append(str(project_root))
 from components.header import render_header
 from components.sidebar import render_sidebar
 from pages.product_master import show_product_master
-
+from components.dashboard_cards import show_dashboard_cards
 
 def main():
     render_header()
     render_sidebar()
     show_product_master()
-
+    show_dashboard_cards()
 
 if __name__ == "__main__":
     main()

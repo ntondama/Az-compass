@@ -27,6 +27,18 @@ class CSVService:
             print("products.csv not found.")
             return pd.DataFrame()
 
+    def get_total_products(self):
+        df = self.load_products()
+        return len(df)
+
+    def get_total_categories(self):
+        df = self.load_products()
+        return df["category"].nunique()
+
+    def get_active_products(self):
+        df = self.load_products()
+        return len(df[df["status"] == "Active"])
+
     def get_product_by_id(self, product_id):
         """
         Get product details using Product ID
