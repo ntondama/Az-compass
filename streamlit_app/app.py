@@ -1,19 +1,16 @@
-import streamlit as st
+from components.header import render_header
+from components.sidebar import render_sidebar
+from pages.product_master import show_product_master
 
-st.set_page_config(
-    page_title="Demand Planning Copilot",
-    page_icon="📈",
-    layout="wide"
-)
 
-st.title("📈 Demand Planning Copilot")
+def main():
 
-st.write("Welcome to the Demand Planning Copilot POC.")
+    render_header()
 
-prompt = st.chat_input("Ask me something...")
+    render_sidebar()
 
-if prompt:
-    st.chat_message("user").write(prompt)
-    st.chat_message("assistant").write(
-        "🚀 Azure AI Foundry integration coming in the next sprint."
-    )
+    show_product_master()
+
+
+if __name__ == "__main__":
+    main()
