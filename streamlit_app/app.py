@@ -1,18 +1,25 @@
+import sys
+from pathlib import Path
+
 import streamlit as st
+
+project_root = Path(__file__).resolve().parent.parent
+sys.path.append(str(project_root))
 
 from components.header import render_header
 from components.sidebar import render_sidebar
 
-from pages.dashboard import show_dashboard
-from pages.product_master import show_product_master
-from pages.demand_planning import show_demand_planning
-from pages.reports import show_reports
-from pages.ai_copilot import show_ai_copilot
+from views.dashboard import show_dashboard
+from views.product_catalog import show_product_catalog
+from views.demand_simulator import show_demand_simulator
+from views.reports import show_reports
+from views.ai_copilot import show_ai_copilot
+
 
 st.set_page_config(
     page_title="Demand Copilot",
     page_icon="📈",
-    layout="wide"
+    layout="wide",
 )
 
 render_header()
@@ -23,10 +30,10 @@ if page == "Dashboard":
     show_dashboard()
 
 elif page == "Product Catalog":
-    show_product_master()
+    show_product_catalog()
 
 elif page == "Demand Simulator":
-    show_demand_planning()
+    show_demand_simulator()
 
 elif page == "Reports":
     show_reports()

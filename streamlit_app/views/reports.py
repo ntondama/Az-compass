@@ -5,4 +5,6 @@ def show_reports():
 
     st.title("📑 Reports")
 
-    st.success("Reports module coming in next sprint.")
+    st.info(
+        "Reports module is under development."
+    )

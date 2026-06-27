@@ -1,22 +1,17 @@
 import streamlit as st
-
 from services.csv_service import CSVService
 
 
 def show_product_catalog():
 
-    st.subheader("📦 Product Catalog")
+    service = CSVService()
 
-    csv_service = CSVService()
+    st.title("📦 Product Catalog")
 
-    products = csv_service.load_products()
+    products = service.load_products()
 
     st.dataframe(
-
         products,
-
         use_container_width=True,
-
-        hide_index=True
-
+        hide_index=True,
     )

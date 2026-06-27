@@ -6,11 +6,11 @@ def show_ai_copilot():
     st.title("🤖 AI Copilot")
 
     question = st.text_area(
-        "Ask your demand planning question"
+        "Ask your business question"
     )
 
     if st.button("Ask AI"):
 
-        st.info(
-            "Agent integration will be implemented tomorrow."
+        st.success(
+            "Azure AI Foundry integration starts tomorrow."
         )

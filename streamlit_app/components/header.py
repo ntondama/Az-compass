@@ -15,7 +15,7 @@ def render_header():
         </h1>
 
         <p style="color:white;">
-        AI Powered Demand Planning Platform
+        AI Powered Retail Demand Planning
         </p>
 
         </div>
