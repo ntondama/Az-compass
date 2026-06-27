@@ -1,35 +1,143 @@
 import streamlit as st
+import pandas as pd
+
 from services.csv_service import CSVService
+from components.dashboard_cards import metric_card
+
+service = CSVService()
 
 
 def show_dashboard():
 
-    service = CSVService()
+    st.title("📊 Executive Dashboard")
+    st.caption("AI-powered demand planning overview")
 
-    st.title("📊 Dashboard")
+    df = service.load_products()
 
-    col1, col2, col3 = st.columns(3)
+    # ==========================
+    # KPI CARDS
+    # ==========================
 
-    col1.metric("Products", service.get_total_products())
+    col1, col2, col3, col4 = st.columns(4)
 
-    col2.metric("Categories", service.get_total_categories())
+    with col1:
+        metric_card(
+            "Products",
+            len(df),
+            "+2 this month",
+            "📦",
+        )
 
-    col3.metric("Active Products", service.get_active_products())
+    with col2:
+        metric_card(
+            "Categories",
+            df["category"].nunique(),
+            "Stable",
+            "🗂️",
+        )
 
-    st.divider()
+    with col3:
+        metric_card(
+            "Active Products",
+            len(df[df["status"] == "Active"]),
+            "100%",
+            "✅",
+        )
 
-    st.subheader("Welcome")
+    with col4:
+        metric_card(
+            "Demand Health",
+            "96%",
+            "+4%",
+            "📈",
+        )
 
-    st.info(
-        """
-Welcome to Demand Copilot.
+    st.markdown("---")
 
-✔ Product Catalog
+    # ==========================
+    # MAIN LAYOUT
+    # ==========================
 
-✔ Demand Simulator
+    left, right = st.columns([3, 1])
 
-✔ Reports
+    with left:
 
-✔ AI Copilot
-"""
-    )
+        st.subheader("Product Catalog Overview")
+
+        st.dataframe(
+            df,
+            use_container_width=True,
+            height=420,
+        )
+
+    with right:
+
+        st.subheader("Planning Alerts")
+
+        st.warning("Low inventory forecast for Dairy")
+
+        st.info("2 new products awaiting approval")
+
+        st.success("Demand forecast refreshed")
+
+        st.error("1 simulation pending")
+
+        st.markdown("---")
+
+        st.subheader("AI Recommendations")
+
+        st.markdown("""
+- Increase Beverage forecast
+
+- Review Dairy pricing
+
+- Optimize Snack inventory
+
+- Simulate next month's demand
+
+- Review inactive products
+""")
+
+    st.markdown("---")
+
+    c1, c2 = st.columns(2)
+
+    with c1:
+
+        st.subheader("Demand Trend")
+
+        trend = pd.DataFrame(
+            {
+                "Week": [
+                    "W1",
+                    "W2",
+                    "W3",
+                    "W4",
+                    "W5",
+                    "W6",
+                ],
+                "Demand": [
+                    110,
+                    125,
+                    118,
+                    140,
+                    150,
+                    162,
+                ],
+            }
+        )
+
+        st.line_chart(
+            trend.set_index("Week")
+        )
+
+    with c2:
+
+        st.subheader("Category Distribution")
+
+        category = (
+            df["category"]
+            .value_counts()
+        )
+
+        st.bar_chart(category)

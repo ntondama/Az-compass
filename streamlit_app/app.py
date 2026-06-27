@@ -3,6 +3,7 @@ from pathlib import Path
 
 import streamlit as st
 
+# Project root
 project_root = Path(__file__).resolve().parent.parent
 sys.path.append(str(project_root))
 

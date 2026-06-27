@@ -1,31 +1,28 @@
 import streamlit as st
-from services.csv_service import CSVService
 
 
-def show_dashboard_cards():
+def metric_card(title, value, delta="", emoji="📊"):
 
-    service = CSVService()
+    st.markdown(
+        f"""
+<div style="
+padding:20px;
+border-radius:12px;
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+border-left:6px solid #0F62FE;
+">
 
-    total_products = service.get_total_products()
-    total_categories = service.get_total_categories()
-    active_products = service.get_active_products()
+<h5>{emoji} {title}</h5>
 
-    col1, col2, col3 = st.columns(3)
+<h2>{value}</h2>
 
-    with col1:
-        st.metric(
-            label="📦 Total Products",
-            value=total_products
-        )
+<p style="color:green;">
+{delta}
+</p>
 
-    with col2:
-        st.metric(
-            label="🏷 Categories",
-            value=total_categories
-        )
+</div>
 
-    with col3:
-        st.metric(
-            label="✅ Active Products",
-            value=active_products
-        )
+""",
+        unsafe_allow_html=True,
+    )
