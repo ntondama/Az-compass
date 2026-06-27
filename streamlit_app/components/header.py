@@ -2,12 +2,23 @@ import streamlit as st
 
 
 def render_header():
-    st.set_page_config(
-        page_title="Demand Planning Copilot",
-        page_icon="📈",
-        layout="wide"
-    )
 
-    st.title("📈 Demand Planning Copilot")
-    st.markdown("### AI Powered Retail Demand Planning")
-    st.divider()
+    st.markdown(
+        """
+        <div style="background:#0F62FE;
+                    padding:18px;
+                    border-radius:10px;
+                    margin-bottom:20px;">
+
+        <h1 style="color:white;">
+        📈 Demand Copilot
+        </h1>
+
+        <p style="color:white;">
+        AI Powered Demand Planning Platform
+        </p>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
