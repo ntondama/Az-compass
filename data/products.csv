@@ -1,0 +1,21 @@
+product_id,product_name,category,unit_price,uom,status
+P1001,Milk,Dairy,55,Litre,Active
+P1002,Bread,Bakery,40,Pack,Active
+P1003,Rice,Grocery,70,Kg,Active
+P1004,Sugar,Grocery,45,Kg,Active
+P1005,Tea Powder,Beverages,180,Kg,Active
+P1006,Coffee,Beverages,250,Jar,Active
+P1007,Eggs,Dairy,90,Dozen,Active
+P1008,Butter,Dairy,120,Pack,Active
+P1009,Cheese,Dairy,280,Pack,Active
+P1010,Biscuits,Snacks,35,Pack,Active
+P1011,Soft Drink,Beverages,40,Bottle,Active
+P1012,Juice,Beverages,95,Bottle,Active
+P1013,Soap,Personal Care,45,Piece,Active
+P1014,Shampoo,Personal Care,220,Bottle,Active
+P1015,Toothpaste,Personal Care,95,Tube,Active
+P1016,Detergent,Home Care,180,Kg,Active
+P1017,Floor Cleaner,Home Care,160,Bottle,Active
+P1018,Cooking Oil,Grocery,185,Litre,Active
+P1019,Salt,Grocery,25,Kg,Active
+P1020,Chocolate,Snacks,60,Bar,Active
