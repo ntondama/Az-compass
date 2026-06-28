@@ -1,6 +1,8 @@
 import pandas as pd
 from pathlib import Path
 
+from models.scenario import Scenario
+
 
 class ScenarioService:
 
@@ -16,28 +18,43 @@ class ScenarioService:
                 columns=[
                     "Scenario",
                     "Category",
+                    "Product",
                     "Volume",
                     "Shipment",
                     "GSV",
                     "NSV",
                     "Spend",
                     "Fund Balance",
+                    "Created Time",
                 ]
             )
 
             df.to_csv(self.file, index=False)
 
-    def load(self):
+    def save(self, scenario: Scenario):
 
-        return pd.read_csv(self.file)
+        df = pd.read_csv(self.file)
 
-    def save(self, scenario):
-
-        df = self.load()
+        new_row = {
+            "Scenario": scenario.scenario_name,
+            "Category": scenario.category,
+            "Product": scenario.product,
+            "Volume": scenario.volume,
+            "Shipment": scenario.shipment,
+            "GSV": scenario.gsv,
+            "NSV": scenario.nsv,
+            "Spend": scenario.spend,
+            "Fund Balance": scenario.fund_balance,
+            "Created Time": scenario.created_time,
+        }
 
         df = pd.concat(
-            [df, pd.DataFrame([scenario])],
+            [df, pd.DataFrame([new_row])],
             ignore_index=True,
         )
 
         df.to_csv(self.file, index=False)
+
+    def load(self):
+
+        return pd.read_csv(self.file)

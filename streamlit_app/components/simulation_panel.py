@@ -7,16 +7,27 @@ def render_simulation_panel(drivers):
 
     st.subheader("📊 Simulation")
 
+    # Initialize session state
+    if "simulation_result" not in st.session_state:
+        st.session_state.simulation_result = None
+
     if st.button(
         "🚀 Run Simulation",
-        use_container_width=True,
+        width="stretch",
     ):
 
         orchestrator = Orchestrator()
 
         result = orchestrator.run_simulation(drivers)
 
+        # Store result
+        st.session_state.simulation_result = result
+
         st.success("Simulation completed successfully.")
+
+    result = st.session_state.simulation_result
+
+    if result:
 
         c1, c2, c3 = st.columns(3)
 
@@ -33,6 +44,4 @@ def render_simulation_panel(drivers):
             f"{result['Fund Balance']:.1f}%"
         )
 
-        return result
-
-    return None
+    return result
