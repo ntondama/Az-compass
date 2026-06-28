@@ -17,6 +17,10 @@ class CSVService:
         # CSV files
         self.products_file = self.data_folder / "products.csv"
 
+    # --------------------------------------------------
+    # Load Products
+    # --------------------------------------------------
+
     def load_products(self):
         """
         Load all products from products.csv
@@ -26,6 +30,10 @@ class CSVService:
         except FileNotFoundError:
             print("products.csv not found.")
             return pd.DataFrame()
+
+    # --------------------------------------------------
+    # Dashboard Methods
+    # --------------------------------------------------
 
     def get_total_products(self):
         df = self.load_products()
@@ -38,6 +46,55 @@ class CSVService:
     def get_active_products(self):
         df = self.load_products()
         return len(df[df["status"] == "Active"])
+
+    # --------------------------------------------------
+    # Planning Workspace Methods
+    # --------------------------------------------------
+
+    def get_categories(self):
+        """
+        Return all unique product categories.
+        """
+        df = self.load_products()
+
+        if df.empty:
+            return []
+
+        return sorted(
+            df["category"].dropna().unique().tolist()
+        )
+
+    def get_products_by_category(self, category):
+        """
+        Return product names for a given category.
+        """
+        df = self.load_products()
+
+        if df.empty:
+            return []
+
+        products = df[df["category"] == category]
+
+        return sorted(
+            products["product_name"].dropna().unique().tolist()
+        )
+
+    def get_all_products(self):
+        """
+        Return all product names.
+        """
+        df = self.load_products()
+
+        if df.empty:
+            return []
+
+        return sorted(
+            df["product_name"].dropna().unique().tolist()
+        )
+
+    # --------------------------------------------------
+    # Product Details
+    # --------------------------------------------------
 
     def get_product_by_id(self, product_id):
         """
@@ -52,16 +109,26 @@ class CSVService:
 
         return product.to_dict(orient="records")[0]
 
+    # --------------------------------------------------
+    # CRUD Operations
+    # --------------------------------------------------
+
     def add_product(self, product):
         """
         Add a new product.
-        product should be a dictionary.
+        Product should be a dictionary.
         """
         df = self.load_products()
 
-        new_df = pd.concat([df, pd.DataFrame([product])], ignore_index=True)
+        new_df = pd.concat(
+            [df, pd.DataFrame([product])],
+            ignore_index=True
+        )
 
-        new_df.to_csv(self.products_file, index=False)
+        new_df.to_csv(
+            self.products_file,
+            index=False
+        )
 
         return True
 
@@ -74,9 +141,15 @@ class CSVService:
         if product_id not in df["product_id"].values:
             return False
 
-        df.loc[df["product_id"] == product_id, "unit_price"] = new_price
+        df.loc[
+            df["product_id"] == product_id,
+            "unit_price"
+        ] = new_price
 
-        df.to_csv(self.products_file, index=False)
+        df.to_csv(
+            self.products_file,
+            index=False
+        )
 
         return True
 
@@ -91,6 +164,9 @@ class CSVService:
 
         df = df[df["product_id"] != product_id]
 
-        df.to_csv(self.products_file, index=False)
+        df.to_csv(
+            self.products_file,
+            index=False
+        )
 
         return True
