@@ -5,6 +5,7 @@ from services.csv_service import CSVService
 from components.driver_panel import render_driver_panel
 from components.simulation_panel import render_simulation_panel
 from components.save_panel import render_save_panel
+from components.scenario_history_panel import render_scenario_history
 
 
 def show_planning_workspace():
@@ -19,7 +20,15 @@ def show_planning_workspace():
 
     st.divider()
 
+    # --------------------------------------------------
+    # Load Categories
+    # --------------------------------------------------
+
     categories = service.get_categories()
+
+    # --------------------------------------------------
+    # Scenario Information
+    # --------------------------------------------------
 
     c1, c2, c3 = st.columns(3)
 
@@ -48,7 +57,9 @@ def show_planning_workspace():
 
     st.divider()
 
-    # ---------------- Driver Configuration ----------------
+    # --------------------------------------------------
+    # Driver Configuration
+    # --------------------------------------------------
 
     drivers = render_driver_panel()
 
@@ -56,7 +67,9 @@ def show_planning_workspace():
 
     st.divider()
 
-    # ---------------- Simulation ----------------
+    # --------------------------------------------------
+    # Simulation
+    # --------------------------------------------------
 
     result = render_simulation_panel(drivers)
 
@@ -68,7 +81,9 @@ def show_planning_workspace():
 
     st.divider()
 
-    # ---------------- AI Recommendation ----------------
+    # --------------------------------------------------
+    # AI Recommendation
+    # --------------------------------------------------
 
     if result:
 
@@ -88,36 +103,38 @@ Scenario **{scenario}** has been evaluated successfully.
 
 ### KPI Summary
 
-- Volume : {result['Volume']:.1f}%
+- **Volume:** {result['Volume']:.1f}%
 
-- Shipment : {result['Shipment']:.1f}%
+- **Shipment:** {result['Shipment']:.1f}%
 
-- GSV : {result['GSV']:.1f}%
+- **GSV:** {result['GSV']:.1f}%
 
-- NSV : {result['NSV']:.1f}%
+- **NSV:** {result['NSV']:.1f}%
 
-- Spend : {result['Spend']:.1f}%
+- **Spend:** {result['Spend']:.1f}%
 
-- Fund Balance : {result['Fund Balance']:.1f}%
+- **Fund Balance:** {result['Fund Balance']:.1f}%
 
 ---
 
-Recommendation:
+### Recommendation
 
-The selected demand drivers indicate positive business impact.
-Review KPI values before saving the scenario.
+The selected demand drivers indicate a positive business impact.
+Review the KPI values before saving the scenario.
 """
         )
 
     else:
 
         st.info(
-            "Run a simulation to generate AI recommendations."
+            "Run a simulation to generate KPI values and AI recommendations."
         )
 
     st.divider()
 
-    # ---------------- Save Scenario ----------------
+    # --------------------------------------------------
+    # Save Scenario
+    # --------------------------------------------------
 
     render_save_panel(
         scenario_name=scenario,
@@ -126,3 +143,11 @@ Review KPI values before saving the scenario.
         drivers=drivers,
         result=result,
     )
+
+    st.divider()
+
+    # --------------------------------------------------
+    # Scenario History
+    # --------------------------------------------------
+
+    render_scenario_history()
