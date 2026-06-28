@@ -10,41 +10,43 @@ def render_sidebar():
 
     st.sidebar.title("Demand Copilot")
 
-    st.sidebar.caption("Retail Demand Planning")
+    st.sidebar.caption("AI Powered Demand Planning")
 
     st.sidebar.markdown("---")
 
     page = st.sidebar.radio(
         "Navigation",
         [
-            "Dashboard",
-            "Product Catalog",
-            "Demand Simulator",
-            "Reports",
-            "AI Copilot",
+            "🏠 Dashboard",
+            "📈 Planning Workspace",
+            "📦 Product Catalog",
+            "📊 Reports",
+            "🤖 AI Copilot",
         ],
     )
 
     st.sidebar.markdown("---")
 
-    st.sidebar.success("Sprint 3 Demo")
+    st.sidebar.success("Sprint 5")
 
     st.sidebar.markdown(
         """
-### Current Modules
+### Available Modules
+
+✅ Dashboard
+
+✅ Planning Workspace
 
 ✅ Product Catalog
 
-✅ Demand Simulator
+🚧 Reports
 
 🚧 AI Copilot
-
-🚧 Reports
 """
     )
 
     st.sidebar.markdown("---")
 
-    st.sidebar.caption("Version 2.0")
+    st.sidebar.caption("Version 3.0")
 
     return page
